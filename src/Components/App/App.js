@@ -42,9 +42,11 @@ class App extends React.Component {
       name: 'babe, I\'m gonna leave you',
       artist: 'led zeppelin',
       album: 'led zeppelin I'}];
+    this.state.playlistName = 'Playlist';
 
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
+    this.updatePlaylistName = this.updatePlaylistName.bind(this);
     };
 
   addTrack(track) {
@@ -65,6 +67,12 @@ class App extends React.Component {
     })
   }
 
+  updatePlaylistName(name) {
+    //console.log(name);
+    this.setState({playlistName: name});
+    setTimeout(() => console.log(this.state.playlistName), 0);
+  }
+
   render() {
     return (
       <div>
@@ -73,8 +81,14 @@ class App extends React.Component {
           <SearchBar />
           <div className="App-playlist">
 
-            <SearchResults searchResults={this.state.SearchResults} onAdd={this.addTrack} />
-            <Playlist playlist={this.state.playlistTracks} onRemove={this.removeTrack} />
+            <SearchResults 
+              searchResults={this.state.SearchResults} 
+              onAdd={this.addTrack} />
+            <Playlist 
+              playlist={this.state.playlistTracks} 
+              onRemove={this.removeTrack} 
+              playlistName={this.state.playlistName}
+              onNameChange={this.updatePlaylistName} />
           </div>
         </div>
       </div>
